@@ -137,7 +137,7 @@ CREATE TABLE `global_announcement` (
   `publish_time` datetime NULL COMMENT '发布时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`announcement_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='系统公告表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统公告表';
 
 CREATE TABLE `news_channel` (
   `channel_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '频道ID',
@@ -149,7 +149,7 @@ CREATE TABLE `news_channel` (
   `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否默认',
   PRIMARY KEY (`channel_id`),
   UNIQUE KEY `channel_name` (`channel_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻频道表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='新闻频道表';
 
 CREATE TABLE `news_user_channel` (
   `user_channel_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
@@ -188,7 +188,7 @@ CREATE TABLE `news_article_content` (
   `article_id` bigint(20) unsigned NOT NULL COMMENT '文章ID',
   `content` longtext NOT NULL COMMENT '文章内容',
   PRIMARY KEY (`article_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章内容表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章内容表';
 
 CREATE TABLE `news_article_statistic` (
   `article_id` bigint(20) unsigned NOT NULL COMMENT '文章ID',
