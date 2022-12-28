@@ -54,7 +54,8 @@ class Count(object):
             data_list.append(count)
             data_list.append(user_id)
         # *表示拆包，*args表示元祖和列表，**kwargs表示字典
-        r.zadd(cls.key, *data_list)
+        if data_list:
+            r.zadd(cls.key, *data_list)
 
     @staticmethod
     def query():
