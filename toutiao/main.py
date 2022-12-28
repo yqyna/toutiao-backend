@@ -6,14 +6,16 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'common'))
 
 from flask import jsonify
 
+from flask_cors import CORS
 
-from . import create_app
+from toutiao import create_app
 from settings.default import DefaultConfig
 
 
 app = create_app(DefaultConfig, enable_config_file=True)
 
 
+CORS(app, resources=r'/*')
 @app.route('/')
 def route_map():
     """
@@ -22,3 +24,6 @@ def route_map():
     a = 1 / 0
     rules_iterator = app.url_map.iter_rules()
     return jsonify({rule.endpoint: rule.rule for rule in rules_iterator if rule.endpoint not in ('route_map', 'static')})
+
+if __name__ == '__main__':
+    app.run()
