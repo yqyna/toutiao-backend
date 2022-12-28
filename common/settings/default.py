@@ -26,22 +26,24 @@ class DefaultConfig(object):
 
     # redis 哨兵
     REDIS_SENTINELS = [
-        ('127.0.0.1', '26380'),
-        ('127.0.0.1', '26381'),
-        ('127.0.0.1', '26382'),
+        ('172.29.29.23', '26380'),
+        ('172.29.29.23', '26381'),
+        ('172.29.29.23', '26379'),
     ]
+    REDIS_SENTINELS_PASSWORD = 'redis'
     REDIS_SENTINEL_SERVICE_NAME = 'mymaster'
 
     # redis 集群
     REDIS_CLUSTER = [
-        {'host': '127.0.0.1', 'port': '7000'},
-        {'host': '127.0.0.1', 'port': '7001'},
-        {'host': '127.0.0.1', 'port': '7002'},
+        {'host': '172.29.29.23', 'port': '6377'},
+        {'host': '172.29.29.23', 'port': '6380'},
+        {'host': '172.29.29.23', 'port': '6381'},
     ]
+    REDIS_CLUSTER_PASSWORD = 'redis'
 
     # 限流服务redis
     # RATELIMIT_STORAGE_URL = 'redis://127.0.0.1:6379/0'
-    RATELIMIT_STORAGE_URL = 'redis+sentinel://127.0.0.1:26380,127.0.0.1:26381,127.0.0.1:26382/mymaster'
+    RATELIMIT_STORAGE_URL = 'redis+sentinel://172.29.29.23:26380,172.29.29.23:26381,172.29.29.23:26379/mymaster'
     RATELIMIT_STRATEGY = 'moving-window'
     # RATELIMIT_DEFAULT = ['200/hour;1000/day']
 
@@ -57,8 +59,10 @@ class DefaultConfig(object):
 
     # ES
     ES = [
-        '127.0.0.1:9200'
+        '172.29.29.23:9200'
     ]
+    ES_USER = "elastic"
+    ES_PASSWORD = "C0BVLVoXl4IotjQkv8gU"
 
     QINIU_ACCESS_KEY = 'SmdtGrstU8mkcHcfLIpY-C_lHIa8brda55Qz4j30'
     QINIU_SECRET_KEY = 'JWpOm6_E7cSgl_akYOVCSuiOs6JlqElRIaxx_JO7'

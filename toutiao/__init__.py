@@ -53,12 +53,12 @@ def create_app(config, enable_config_file=False):
     register_converters(app)
 
     from redis.sentinel import Sentinel
-    _sentinel = Sentinel(app.config['REDIS_SENTINELS'])
+    _sentinel = Sentinel(app.config['REDIS_SENTINELS'], password=app.config['REDIS_SENTINELS_PASSWORD'])
     app.redis_master = _sentinel.master_for(app.config['REDIS_SENTINEL_SERVICE_NAME'])
     app.redis_slave = _sentinel.slave_for(app.config['REDIS_SENTINEL_SERVICE_NAME'])
 
     from rediscluster import StrictRedisCluster
-    app.redis_cluster = StrictRedisCluster(startup_nodes=app.config['REDIS_CLUSTER'])
+    app.redis_cluster = StrictRedisCluster(startup_nodes=app.config['REDIS_CLUSTER'], password=app.config['REDIS_CLUSTER_PASSWORD'])
 
     # rpc
     # app.rpc_reco = grpc.insecure_channel(app.config['RPC'].RECOMMEND)
@@ -71,7 +71,8 @@ def create_app(config, enable_config_file=False):
         # refresh nodes after a node fails to respond
         sniff_on_connection_fail=True,
         # and also every 60 seconds
-        sniffer_timeout=60
+        sniffer_timeout=60,
+        http_auth=(app.config['ES_USER'], app.config['ES_PASSWORD'])
     )
 
     # socket.io
